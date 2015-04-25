@@ -9,31 +9,29 @@ int MINIMUM_MOISTURE_LEVEL = 20;
 int SLEEP_SECONDS = 30;
 pot_t POTS[] = {{10, 11}, {12, 13}};
 
+int potcount = sizeof(POTS) / sizeof(POTS[0]);
+
 void setup() {
-  // Use 2 moisture sensors (1 per pot)
-  // Use 2 red LEDS: one for each pot
-  // Use 2 yellow LED to indicate a measurement is in progress for each pot
-  // Initially, turn all LEDs off
-  int potcount = sizeof(POTS) / sizeof(POTS[0]);
   for (int i = 0; i < potcount; i++) {
     pinMode(POTS[i].yellow, OUTPUT);
+    digitalWrite(POTS[i].yellow, LOW);
+
     pinMode(POTS[i].red, OUTPUT);
+    digitalWrite(POTS[i].red, LOW);
   }
-  
-  digitalWrite(pot1yellow, LOW);
-  */
-//  digitalWrite(pot1, LOW);
 }
 
 void loop() {
-  
-//   for each moisture sensor in the pot
-//     display measurement indicator (yellow)
-//     read the input for 1 second from digital pin
-//     if input < MINIMUM_MOISTURE_LEVEL
-//       display red LED for the pot
-//     else
-//       turn off red LED for the pot
-//     turn off the measurement indicator (yellow)
+  for (int i = 0; i < potcount; i++) {
+    digitalWrite(POTS[i].yellow, HIGH);
+    delay(1000); // remove after adding real measurement code
+    int measurement = 20;
+    if (measurement < MINIMUM_MOISTURE_LEVEL) {
+      digitalWrite(POTS[i].red, HIGH);
+    } else {
+      digitalWrite(POTS[i].red, LOW);
+    }
+    digitalWrite(POTS[i].yellow, LOW);
+  }
   delay(SLEEP_SECONDS * 1000);
 }

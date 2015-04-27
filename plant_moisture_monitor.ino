@@ -7,17 +7,17 @@ typedef struct pottype_ {
 // configuration
 int MINIMUM_MOISTURE_LEVEL = 20;
 int SLEEP_SECONDS = 30;
-pot_t POTS[] = {{10, 11}, {12, 13}};
+pot_t POTS[] = {{13, 12}, {11, 10}};
 
 int potcount = sizeof(POTS) / sizeof(POTS[0]);
 
 void setup() {
   for (int i = 0; i < potcount; i++) {
     pinMode(POTS[i].yellow, OUTPUT);
-    digitalWrite(POTS[i].yellow, LOW);
+    digitalWrite(POTS[i].yellow, HIGH);
 
     pinMode(POTS[i].red, OUTPUT);
-    digitalWrite(POTS[i].red, LOW);
+    digitalWrite(POTS[i].red, HIGH);
   }
 }
 
